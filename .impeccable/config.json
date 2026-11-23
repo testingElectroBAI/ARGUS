@@ -1,0 +1,35 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "space grotesk",
+        "createdAt": "2026-11-23T17:07:03.951Z",
+        "reason": "The supplied ARGUS UI reference uses Space Grotesk; retain its specified typography consistently."
+      },
+      {
+        "rule": "overused-font",
+        "value": "geist mono",
+        "createdAt": "2026-11-23T17:07:04.542Z",
+        "reason": "The supplied ARGUS UI reference uses Geist Mono; retain its specified typography consistently."
+      },
+      {
+        "rule": "overused-font",
+        "value": "geist",
+        "createdAt": "2026-11-23T17:07:05.072Z",
+        "reason": "The supplied ARGUS UI reference uses Geist; retain its specified typography consistently."
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "templates/index.html"
+        ],
+        "createdAt": "2026-11-23T17:07:05.596Z",
+        "reason": "False positive: the 64px flex row centers its content, leaving about 21px vertical inset before the bottom border."
+      }
+    ]
+  }
+}

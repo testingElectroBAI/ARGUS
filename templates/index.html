@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0D1320">
+<title>ARGUS — Research Workspace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside id="workspace-sidebar" class="sidebar" aria-label="Workspace sessions">
+    <div>
+      <div class="sidebar-brand">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="9" opacity=".45"/><circle cx="12" cy="12" r="5" opacity=".8"/><circle cx="12" cy="12" r="1.75" fill="currentColor"/></svg>
+        <span class="brand-name">ARGUS</span>
+      </div>
+
+      <nav class="workspace-nav" aria-label="Workspace">
+        <div class="nav-heading">
+          <span class="mono-label">WORKSPACE</span>
+          <button id="reset-session-btn" class="icon-button new-session" type="button" aria-label="Start a new session" title="Start a new session">
+            <span class="material-symbols-outlined" aria-hidden="true">add</span>
+          </button>
+        </div>
+        <div class="session-item" aria-current="page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 4.5h10l4 4v11H5z"/><path d="M15 4.5v4h4M8 13h8m-8 3h6"/></svg>
+          <span>Current session</span>
+          <span class="session-dot" aria-hidden="true"></span>
+        </div>
+      </nav>
+    </div>
+
+    <div class="sidebar-footer"><span class="mono-label">Local session</span><span aria-hidden="true">·</span><span>Not saved</span></div>
+  </aside>
+  <button id="sidebar-backdrop" class="sidebar-backdrop" type="button" aria-label="Close workspace menu" tabindex="-1"></button>
+
+  <main class="main-panel">
+    <div id="gradient-ascii-bg" class="gradient-ascii-container" aria-hidden="true"><canvas class="gradient-ascii-canvas"></canvas></div>
+    <div class="canvas-scrim" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <button id="mobile-menu-btn" class="icon-button mobile-menu" type="button" aria-label="Open workspace menu" aria-controls="workspace-sidebar" aria-expanded="false">
+        <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+      </button>
+      <div class="mobile-brand">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="9" opacity=".45"/><circle cx="12" cy="12" r="5" opacity=".8"/><circle cx="12" cy="12" r="1.75" fill="currentColor"/></svg>
+        <span class="brand-name">ARGUS</span>
+      </div>
+      <div class="topbar-actions">
+        <button id="stats" class="stats-button" type="button" aria-label="Show runtime statistics">
+          <span class="material-symbols-outlined" aria-hidden="true">monitoring</span><span>Stats</span>
+        </button>
+        <div class="ready-status"><span class="ready-dot" aria-hidden="true"></span><span>Ready</span></div>
+      </div>
+    </header>
+
+    <section class="workspace" aria-label="Research workspace">
+      <div id="conversation" class="conversation">
+        <section id="empty-state" class="hero-state">
+          <div class="hero-title">
+            <svg class="hero-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="9" opacity=".45"/><circle cx="12" cy="12" r="5" opacity=".8"/><circle cx="12" cy="12" r="1.75" fill="currentColor"/></svg>
+            <h1>What are you researching?</h1>
+          </div>
+          <p>Ask a question, share an image, or explore a video.</p>
+        </section>
+        <section id="messages" class="thread" role="log" aria-live="polite" aria-relevant="additions text" aria-label="Conversation"></section>
+      </div>
+
+      <footer class="composer-footer">
+        <div class="composer-wrap">
+          <div id="out" class="status-message" role="status" aria-live="polite"></div>
+          <form id="f" class="composer">
+            <div id="shots" class="attachment-chips" role="group" aria-label="Selected attachments"></div>
+            <div class="composer-primary-row">
+              <button id="expand-tools-btn" class="expand-tools" type="button" aria-expanded="false" aria-controls="composer-toolbar" aria-label="Show attachments and model options">
+                <span id="expand-tools-icon" class="material-symbols-outlined" aria-hidden="true">add</span>
+              </button>
+              <label class="sr-only" for="text">Ask anything</label>
+              <textarea id="text" rows="1" placeholder="Ask anything…" autocomplete="off"></textarea>
+              <button id="btn" class="send-button" type="submit" aria-label="Send query">
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_upward</span>
+              </button>
+            </div>
+
+            <div id="composer-toolbar" class="composer-toolbar" hidden>
+              <div class="modality-tools" aria-label="Attachments and captures">
+                <input id="images" class="file-input" type="file" accept="image/*" multiple aria-hidden="true" tabindex="-1">
+                <button id="add-images" class="modality-button" type="button" data-modality="Image" aria-label="Add images">
+                  <span class="material-symbols-outlined" aria-hidden="true">image</span><span>Image</span>
+                </button>
+                <input id="video" class="file-input" type="file" accept="video/*" aria-hidden="true" tabindex="-1">
+                <button id="add-video" class="modality-button" type="button" data-modality="Video" aria-label="Add a video">
+                  <span class="material-symbols-outlined" aria-hidden="true">videocam</span><span>Video</span>
+                </button>
+                <button id="cam" class="modality-button" type="button" data-modality="Camera" aria-label="Capture a webcam snapshot">
+                  <span class="material-symbols-outlined" aria-hidden="true">photo_camera</span><span>Camera</span>
+                </button>
+                <button id="scr" class="modality-button" type="button" data-modality="Screen" aria-label="Capture your screen">
+                  <span class="material-symbols-outlined" aria-hidden="true">desktop_windows</span><span>Screen</span>
+                </button>
+              </div>
+              <label class="model-control"><span class="sr-only">Model routing</span>
+                <select id="force" aria-label="Model routing">
+                  <option value="">Auto</option>
+                  <option value="vision">Vision only</option>
+                  <option value="reasoning">Reasoning only</option>
+                </select>
+                <span class="material-symbols-outlined" aria-hidden="true">unfold_more</span>
+              </label>
+            </div>
+          </form>
+          <p id="composer-disclaimer" class="composer-disclaimer" hidden>Free OpenRouter endpoints are logged by the provider (NVIDIA says so for Nemotron). Do not upload private images or personal data.</p>
+          <p class="composer-hint">Enter to send <span aria-hidden="true">·</span> Shift + Enter for a new line</p>
+        </div>
+      </footer>
+    </section>
+  </main>
+</div>
+<script src="/static/gradient-ascii.js"></script>
+<script src="/static/script.js"></script>
+</body>
+</html>
